@@ -1,52 +1,87 @@
 import React from 'react';
-import { MapPin, Car, CreditCard } from 'lucide-react';
+import { MapPin, ShieldCheck, Zap } from 'lucide-react';
 
-export const HowItWorks: React.FC = () => {
+interface HowItWorksProps {
+  theme: 'dark' | 'light';
+}
+
+export const HowItWorks: React.FC<HowItWorksProps> = ({ theme }) => {
   const steps = [
     {
       icon: MapPin,
-      title: "Set Location",
-      desc: "Enter your destination and choose your pickup point on the map."
+      title: "Select Destination",
+      desc: "Intuitive interface that understands regional landmarks effortlessly.",
+      color: "text-brand-blue"
     },
     {
-      icon: Car,
-      title: "Choose Ride",
-      desc: "Select the vehicle type that fits your needs and budget."
+      icon: ShieldCheck,
+      title: "Verified Dispatch",
+      desc: "Our AI matches you with the highest-rated driver in your immediate vicinity.",
+      color: "text-brand-emerald"
     },
     {
-      icon: CreditCard,
-      title: "Enjoy & Pay",
-      desc: "Relax during your ride and pay seamlessly with cash or card."
+      icon: Zap,
+      title: "Elite Transit",
+      desc: "Enjoy a silent, secure, and premium journey to your destination.",
+      color: "text-brand-blue"
     }
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden bg-slate-950">
-       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[400px] bg-brand-900/10 rounded-full blur-[100px] -z-10"></div>
-       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
-             <h2 className="text-brand-500 font-bold tracking-wider uppercase text-sm mb-3">Simple Process</h2>
-             <h3 className="text-3xl md:text-4xl font-bold text-white">How Caxi Works</h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-           {/* Connecting Line (Desktop) */}
-           <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-transparent via-slate-700 to-transparent z-0"></div>
-
-          {steps.map((step, idx) => (
-            <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-              <div className="w-24 h-24 rounded-3xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-8 shadow-2xl group-hover:scale-110 group-hover:border-brand-500/50 transition-all duration-300 relative">
-                  <div className="absolute inset-0 bg-brand-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <step.icon className="w-10 h-10 text-white group-hover:text-brand-400 transition-colors" />
-                  <div className="absolute -bottom-3 bg-slate-800 text-slate-300 text-xs font-bold px-3 py-1 rounded-full border border-slate-700">
-                    Step 0{idx + 1}
+    <section className="py-40 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center gap-24">
+          <div className="lg:w-1/2 space-y-8">
+            <h2 className="text-5xl md:text-7xl font-display font-extrabold tracking-tighter leading-tight">
+              Sophistication <br/>
+              <span className="opacity-40">in every click.</span>
+            </h2>
+            <p className="text-xl opacity-60 max-w-lg leading-relaxed">
+              We've stripped away the noise to leave you with a pure, high-performance mobility tool. 
+              Designed for those who value time and tranquility.
+            </p>
+            <div className="pt-8 space-y-12">
+              {steps.map((step, i) => (
+                <div key={i} className="flex gap-6 group">
+                  <div className={`flex-shrink-0 w-12 h-12 rounded-full border flex items-center justify-center transition-all group-hover:scale-110 ${
+                    theme === 'dark' ? 'border-white/10 bg-white/5' : 'border-black/5 bg-black/5'
+                  }`}>
+                    <step.icon size={20} className={step.color} />
                   </div>
-              </div>
-              <h4 className="text-xl font-bold text-white mb-3">{step.title}</h4>
-              <p className="text-slate-400 max-w-xs">{step.desc}</p>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                    <p className="opacity-50 text-sm leading-relaxed max-w-xs">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          
+          <div className="lg:w-1/2 relative">
+            <div className={`relative aspect-[4/5] rounded-[4rem] overflow-hidden border transition-all duration-700 ${
+              theme === 'dark' ? 'border-white/10' : 'border-black/10'
+            }`}>
+              <img 
+                src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1000" 
+                className="w-full h-full object-cover grayscale opacity-50 hover:grayscale-0 transition-all duration-1000"
+                alt="Premium Interior"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+              
+              <div className="absolute bottom-12 left-12 right-12 glass p-8 rounded-3xl border-white/10 backdrop-blur-2xl">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-brand-blue mb-2">Live Fleet Status</div>
+                <div className="flex justify-between items-end">
+                  <div>
+                    <div className="text-2xl font-bold text-white">Sharm El Sheikh</div>
+                    <div className="text-xs text-white/40">14 Available Drivers Nearby</div>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-brand-blue flex items-center justify-center animate-pulse">
+                    <Zap size={20} className="text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
