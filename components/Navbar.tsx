@@ -22,7 +22,7 @@ export const Navbar: React.FC = () => {
             <img 
               src={LOGO_URL} 
               alt="Caxi Logo" 
-              className="h-10 w-auto md:h-12 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]" 
+              className="h-16 w-auto md:h-24 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(20,184,166,0.3)] transition-all duration-300" 
             />
           </div>
         </div>
